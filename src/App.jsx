@@ -26,7 +26,6 @@ export default function App() {
   }, []);
 
 const handleAddWidgets = (widgetsToAdd, categoryKey) => {
-  console.log('handleAddWidgets called with:', widgetsToAdd, categoryKey); // Debug
   setDashboard((prev) =>
     prev.map((cat) =>
       cat.key === categoryKey

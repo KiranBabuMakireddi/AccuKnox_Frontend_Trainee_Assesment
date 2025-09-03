@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dashboardData from '../WidgetData';
 
 export default function AddWidgetModal({
@@ -10,6 +10,14 @@ export default function AddWidgetModal({
 }) {
   const [activeTab, setActiveTab] = useState(categoryKey || dashboardData[0]?.key);
   const [selectedWidgets, setSelectedWidgets] = useState({});
+
+  // Reset selectedWidgets and activeTab when modal opens
+  useEffect(() => {
+    setSelectedWidgets({}); // Clear selections
+    if (categoryKey) {
+      setActiveTab(categoryKey); // Set active tab to categoryKey for non-global modal
+    }
+  }, [categoryKey, isGlobal]);
 
   const getAvailableWidgets = (key) => {
     const all = dashboardData.find((d) => d.key === key)?.widgets || [];
@@ -32,8 +40,9 @@ export default function AddWidgetModal({
     if (isGlobal) {
       onSave(selectedWidgets);
     } else {
-      onSave(selectedWidgets[categoryKey] || []);
+      onSave(selectedWidgets[categoryKey] || [], categoryKey); // Pass categoryKey explicitly
     }
+    onClose();
   };
 
   return (
@@ -57,8 +66,9 @@ export default function AddWidgetModal({
                 activeTab === cat.key
                   ? 'border-b-2 border-blue-600 font-semibold'
                   : 'text-gray-600'
-              }`}
-              onClick={() => setActiveTab(cat.key)}
+              } ${!isGlobal && cat.key !== categoryKey ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={() => isGlobal && setActiveTab(cat.key)} // Disable tab switching for non-global
+              disabled={!isGlobal && cat.key !== categoryKey}
             >
               {cat.category}
             </button>

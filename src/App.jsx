@@ -25,27 +25,28 @@ export default function App() {
     );
   }, []);
 
-  const handleAddWidgets = (widgetsToAdd, categoryKey) => {
-    setDashboard((prev) =>
-      prev.map((cat) =>
-        cat.key === categoryKey
-          ? {
-              ...cat,
-              widgets: [
-                ...cat.widgets,
-                ...widgetsToAdd
-                  .filter((w) => !cat.widgets.some((existing) => existing.name === w.name))
-                  .map((widget) => ({
-                    ...widget,
-                    chartData: generateRandomChartData(widget.chartType),
-                  })),
-              ],
-            }
-          : cat
-      )
-    );
-    setModalCategoryKey(null);
-  };
+const handleAddWidgets = (widgetsToAdd, categoryKey) => {
+  console.log('handleAddWidgets called with:', widgetsToAdd, categoryKey); // Debug
+  setDashboard((prev) =>
+    prev.map((cat) =>
+      cat.key === categoryKey
+        ? {
+            ...cat,
+            widgets: [
+              ...cat.widgets,
+              ...widgetsToAdd
+                .filter((w) => !cat.widgets.some((existing) => existing.name === w.name))
+                .map((widget) => ({
+                  ...widget,
+                  chartData: generateRandomChartData(widget.chartType),
+                })),
+            ],
+          }
+        : cat
+    )
+  );
+  setModalCategoryKey(null);
+};
 
   const handleGlobalAddWidgets = (widgetsMap) => {
     setDashboard((prev) =>

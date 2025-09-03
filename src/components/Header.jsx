@@ -1,12 +1,12 @@
 import React from 'react';
 import { ArrowsCounterClockwise } from 'phosphor-react';
 
-export default function Header({ setGlobalModalOpen }) {
+export default function Header({ setGlobalModalOpen,onRefresh }) {
   return (
     <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4 p-4 bg-white sticky top-0 z-50">
       <h1 className="text-lg font-semibold">CNAPP Dashboard</h1>
       <div className="flex flex-wrap items-center gap-2">
-        <button className="border px-3 py-1 rounded text-sm" aria-label="Refresh">
+        <button className="border px-3 py-1 rounded text-sm" aria-label="Refresh" onClick={onRefresh}>
           <ArrowsCounterClockwise size={32} />
         </button>
         <button className="border px-3 py-1 rounded text-sm" aria-label="More options">

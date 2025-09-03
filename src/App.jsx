@@ -9,11 +9,16 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearSca
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 export default function App() {
-  const [dashboard, setDashboard] = useState(dashboardData);
+  const [dashboard, setDashboard] = useState(
+    dashboardData.map((category) => ({
+      ...category,
+      widgets: []
+    }))
+  );
   const [modalCategoryKey, setModalCategoryKey] = useState(null);
   const [isGlobalModalOpen, setGlobalModalOpen] = useState(false);
 
-  useEffect(() => {
+   useEffect(() => {
     setDashboard((prev) =>
       prev.map((category) => ({
         ...category,
@@ -78,9 +83,18 @@ const handleAddWidgets = (widgetsToAdd, categoryKey) => {
     );
   };
 
+  const handleRefresh = () => {
+    setDashboard((prev) =>
+      prev.map((cat) => ({
+        ...cat,
+        widgets: []
+      }))
+    );
+  };
+
   return (
     <div className="min-h-screen bg-[#f3f6fb]">
-      <Header setGlobalModalOpen={setGlobalModalOpen} />
+      <Header setGlobalModalOpen={setGlobalModalOpen} onRefresh={handleRefresh}/>
       {dashboard.map(({ category, widgets, key }) => (
         <Category
           key={key}

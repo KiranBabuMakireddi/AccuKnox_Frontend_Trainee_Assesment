@@ -79,7 +79,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f3f6fb] p-6">
+    <div className="min-h-screen bg-[#f3f6fb]">
       <Header setGlobalModalOpen={setGlobalModalOpen} />
       {dashboard.map(({ category, widgets, key }) => (
         <Category

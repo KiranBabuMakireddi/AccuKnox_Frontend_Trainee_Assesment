@@ -7,7 +7,7 @@ This project is a drag-and-drop interface built with **React**, **Vite**, **char
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/KiranBabuMakireddi/AccuKnox_Frontend_Trainee_Assesment.git](https://github.com/KiranBabuMakireddi/AccuKnox_Frontend_Trainee_Assesment.git
+git clone https://github.com/KiranBabuMakireddi/AccuKnox_Frontend_Trainee_Assesment.git]
 cd AccuKnox_Frontend_Trainee_Assesment
 ```
 
